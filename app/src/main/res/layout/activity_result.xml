@@ -25,6 +25,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.084" />
 
+    <!--    <TextView-->
+<!--        android:id="@+id/right"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/amaranth_bold"-->
+<!--        android:gravity="center"-->
+<!--        android:text="5 correct"-->
+<!--        android:textColor="#673AB7"-->
+<!--        android:textSize="30sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.195" />-->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,31 +54,15 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.175" />
 
     <TextView
-        android:id="@+id/right"
+        android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/amaranth_bold"
         android:gravity="center"
-        android:text="5 correct"
-        android:textColor="#673AB7"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195" />
-
-    <TextView
-        android:id="@+id/wrong"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/amaranth_bold"
-        android:gravity="center"
-        android:text="5 wrong"
+        android:text="5 out of 10"
         android:textColor="#E91E63"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -70,21 +70,38 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.221" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/newGame"
         android:layout_width="160dp"
         android:layout_height="46dp"
-        android:text="TRY AGAIN"
-        android:textSize="20sp"
-        android:textColor="#E91E63"
-        android:id="@+id/newGame"
-        android:fontFamily="@font/amaranth_bold"
         android:background="@drawable/round_bg"
+        android:fontFamily="@font/amaranth_bold"
+        android:text="TRY AGAIN"
+        android:textColor="#E91E63"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.737" />
+        app:layout_constraintVertical_bias="0.724" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/close"
+        android:layout_width="160dp"
+        android:layout_height="46dp"
+        android:background="@drawable/round_bg"
+        android:backgroundTint="#E91E63"
+        android:fontFamily="@font/amaranth_bold"
+        android:text="Close"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.81" />
 </androidx.constraintlayout.widget.ConstraintLayout>

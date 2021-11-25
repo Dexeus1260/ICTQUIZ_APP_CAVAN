@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginTop="11dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="25dp"
             android:fontFamily="sans-serif-smallcaps"
             android:text="59"
 
@@ -94,6 +94,7 @@
         android:text="mga pangutana nga dili kaayo lisod"
         android:textSize="16sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"

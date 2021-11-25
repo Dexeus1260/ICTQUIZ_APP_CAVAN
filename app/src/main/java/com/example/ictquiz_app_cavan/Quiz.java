@@ -78,7 +78,7 @@ public class Quiz extends AppCompatActivity {
         }
         else
         {
-            quiz.setBackgroundResource(R.drawable.bg7);
+            quiz.setBackgroundResource(R.drawable.bg3);
         }
 
         topicName.setText(topic);
@@ -229,9 +229,10 @@ public class Quiz extends AppCompatActivity {
             Intent mintent = new Intent(Quiz.this,result.class);
             Bundle extras = new Bundle();
             extras.putInt("right", getCorrectAns());
-            extras.putInt("wrong", getIncorrectAns());
+            extras.putInt("size", getSize());
             mintent.putExtras(extras);
             startActivity(mintent);
+            cancelTimer();
             finish();
 
         }
@@ -253,7 +254,7 @@ public class Quiz extends AppCompatActivity {
                     Intent mintent = new Intent(Quiz.this,result.class);
                     Bundle extras = new Bundle();
                     extras.putInt("right", getCorrectAns());
-                    extras.putInt("wrong", getIncorrectAns());
+                    extras.putInt("size", getSize());
                     mintent.putExtras(extras);
                     startActivity(mintent);
                     finish();
@@ -286,34 +287,33 @@ public class Quiz extends AppCompatActivity {
         return correctAns;
     }
 
-    private  int getIncorrectAns()
-    {
-        int incorrectAns = 0;
-
-        for (int i=0;i<questionsLists.size();i++)
-        {
-            final String getuserAnswer = questionsLists.get(i).getUserAnswer();
-            final String getAnswer = questionsLists.get(i).getAnswer();
-
-            if(!getuserAnswer.equals(getAnswer))
-            {
-                incorrectAns = incorrectAns + 1;
-            }
-//            Toast.makeText(this,""+incorrectAns, Toast.LENGTH_SHORT).show();
-        }
-
-        return incorrectAns;
-    }
-
-
-//    private int getSize(){
-//        return questionsLists.size();
+//    private  int getIncorrectAns()
+//    {
+//        int incorrectAns = 0;
+//
+//        for (int i=0;i<questionsLists.size();i++)
+//        {
+//            final String getuserAnswer = questionsLists.get(i).getUserAnswer();
+//            final String getAnswer = questionsLists.get(i).getAnswer();
+//
+//            if(!getuserAnswer.equals(getAnswer))
+//            {
+//                incorrectAns = incorrectAns + 1;
+//            }
+////            Toast.makeText(this,""+incorrectAns, Toast.LENGTH_SHORT).show();
+//        }
+//
+//        return incorrectAns;
 //    }
+
+
+    private int getSize(){
+        return questionsLists.size();
+    }
 
     @Override
     public void onBackPressed() {
-//        quizTimer.purge();
-//        quizTimer.cancel();
+
         cancelTimer();
         startActivity(new Intent(Quiz.this,dashboard.class));
         finish();

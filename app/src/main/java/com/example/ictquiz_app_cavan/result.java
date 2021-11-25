@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,18 +17,19 @@ public class result extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
 
-        final TextView right = findViewById(R.id.right);
-        final TextView wrong = findViewById(R.id.wrong);
+//        final TextView right = findViewById(R.id.right);
+        final TextView result = findViewById(R.id.result);
 
         final AppCompatButton again = findViewById(R.id.newGame);
+        final Button close = findViewById(R.id.close);
 
         Bundle extras = getIntent().getExtras();
         final int getCorrect = extras.getInt("right");
-        final int getIncorrect = extras.getInt("wrong");
+        final int getSIze = extras.getInt("size");
 
 //        Toast.makeText(this,String.valueOf(getCorrect), Toast.LENGTH_SHORT).show();
-        right.setText( String.valueOf(getCorrect)+ " correct" );
-        wrong.setText(String.valueOf(getIncorrect) + " wrong" );
+
+        result.setText( String.valueOf(getCorrect)+" out of "+ String.valueOf(getSIze));
 
         again.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +41,13 @@ public class result extends AppCompatActivity {
             }
         });
 
-
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finishAffinity();
+                System.exit(1);
+            }
+        });
     }
 
     @Override
@@ -47,4 +55,6 @@ public class result extends AppCompatActivity {
         startActivity(new Intent(result.this,dashboard.class));
         finish();
     }
+
+
 }
