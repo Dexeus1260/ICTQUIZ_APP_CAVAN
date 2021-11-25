@@ -103,7 +103,7 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View view) {
                 if (selectedOption.isEmpty())
                 {
-                    selectedOption = op1.toString();
+                    selectedOption = op1.getText().toString();
                     op1.setBackgroundResource(R.drawable.wrong_bg);
                     op1.setTextColor(Color.parseColor("#FFFFFF"));
                     questionsLists.get(currentQuestionPosition).setUserAnswer(selectedOption);
@@ -120,7 +120,7 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View view) {
                 if (selectedOption.isEmpty())
                 {
-                    selectedOption = op2.toString();
+                    selectedOption = op2.getText().toString();
                     op2.setBackgroundResource(R.drawable.wrong_bg);
                     op2.setTextColor(Color.parseColor("#FFFFFF"));
                     questionsLists.get(currentQuestionPosition).setUserAnswer(selectedOption);
@@ -137,7 +137,7 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View view) {
                 if (selectedOption.isEmpty())
                 {
-                    selectedOption = op3.toString();
+                    selectedOption = op3.getText().toString();
                     op3.setBackgroundResource(R.drawable.wrong_bg);
                     op3.setTextColor(Color.parseColor("#FFFFFF"));
                     questionsLists.get(currentQuestionPosition).setUserAnswer(selectedOption);
@@ -154,7 +154,7 @@ public class Quiz extends AppCompatActivity {
             public void onClick(View view) {
                 if (selectedOption.isEmpty())
                 {
-                    selectedOption = op4.toString();
+                    selectedOption = op4.getText().toString();
                     op4.setBackgroundResource(R.drawable.wrong_bg);
                     op4.setTextColor(Color.parseColor("#FFFFFF"));
                     questionsLists.get(currentQuestionPosition).setUserAnswer(selectedOption);
@@ -222,19 +222,128 @@ public class Quiz extends AppCompatActivity {
             op2.setText(questionsLists.get(currentQuestionPosition).getOp2());
             op3.setText(questionsLists.get(currentQuestionPosition).getOp3());
             op4.setText(questionsLists.get(currentQuestionPosition).getOp4());
+
+
         }
         else{
-            Intent intent = new Intent(Quiz.this,result.class);
-            intent.putExtra("correct",getCorrectAns());
-            intent.putExtra("incorrect",getIncorrectAns());
-            startActivity(intent);
+            Intent mintent = new Intent(Quiz.this,result.class);
+            Bundle extras = new Bundle();
+            extras.putInt("right", getCorrectAns());
+            extras.putInt("wrong", getIncorrectAns());
+            mintent.putExtras(extras);
+            startActivity(mintent);
             finish();
 
         }
     }
 
 
+    private void startTimer()
+    {
+        Timer = new CountDownTimer(60000,1000) {
+            @Override
+            public void onTick(long milliUntilFinihed) {
+                timer.setText(""+milliUntilFinihed/1000);
+            }
 
+            @Override
+            public void onFinish() {
+                   Timer.cancel();
+                    Toast.makeText(Quiz.this,"Time Over", Toast.LENGTH_SHORT).show();
+                    Intent mintent = new Intent(Quiz.this,result.class);
+                    Bundle extras = new Bundle();
+                    extras.putInt("right", getCorrectAns());
+                    extras.putInt("wrong", getIncorrectAns());
+                    mintent.putExtras(extras);
+                    startActivity(mintent);
+                    finish();
+            }
+        };
+        Timer.start();
+    }
+
+    private void cancelTimer() {
+        if(Timer!=null)
+            Timer.cancel();
+    }
+
+    private  int getCorrectAns()
+    {
+        int correctAns = 0;
+
+        for (int i=0;i<questionsLists.size();i++)
+        {
+            final String getUserAnswer = questionsLists.get(i).getUserAnswer();
+            final String getAnswer = questionsLists.get(i).getAnswer();
+
+            if(getUserAnswer.equals(getAnswer))
+            {
+                correctAns++ ;
+            }
+//            Toast.makeText(this,""+correctAns, Toast.LENGTH_SHORT).show();
+        }
+
+        return correctAns;
+    }
+
+    private  int getIncorrectAns()
+    {
+        int incorrectAns = 0;
+
+        for (int i=0;i<questionsLists.size();i++)
+        {
+            final String getuserAnswer = questionsLists.get(i).getUserAnswer();
+            final String getAnswer = questionsLists.get(i).getAnswer();
+
+            if(!getuserAnswer.equals(getAnswer))
+            {
+                incorrectAns = incorrectAns + 1;
+            }
+//            Toast.makeText(this,""+incorrectAns, Toast.LENGTH_SHORT).show();
+        }
+
+        return incorrectAns;
+    }
+
+
+//    private int getSize(){
+//        return questionsLists.size();
+//    }
+
+    @Override
+    public void onBackPressed() {
+//        quizTimer.purge();
+//        quizTimer.cancel();
+        cancelTimer();
+        startActivity(new Intent(Quiz.this,dashboard.class));
+        finish();
+    }
+    private void revealAnswer()
+    {
+        final String getAnswer = questionsLists.get(currentQuestionPosition).getAnswer();
+
+        if (op1.getText().toString().equals(getAnswer))
+        {
+            op1.setBackgroundResource(R.drawable.correct_bg);
+            op1.setTextColor(Color.parseColor("#FFFFFF"));
+
+        }
+        else if (op2.getText().toString().equals(getAnswer))
+        {
+            op2.setBackgroundResource(R.drawable.correct_bg);
+            op2.setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        else if (op3.getText().toString().equals(getAnswer))
+        {
+            op3.setBackgroundResource(R.drawable.correct_bg);
+            op3.setTextColor(Color.parseColor("#FFFFFF"));
+        }
+        else if (op4.getText().toString().equals(getAnswer))
+        {
+            op4.setBackgroundResource(R.drawable.correct_bg);
+            op4.setTextColor(Color.parseColor("#FFFFFF"));
+        }
+    }
 
 //    private void startTimer(TextView timerTextView)
 //    {
@@ -288,108 +397,4 @@ public class Quiz extends AppCompatActivity {
 //        },1000,1000);
 //    }
 
-    private void startTimer()
-    {
-        Timer = new CountDownTimer(60000,1000) {
-            @Override
-            public void onTick(long milliUntilFinihed) {
-                timer.setText("00:"+milliUntilFinihed/1000);
-            }
-
-            @Override
-            public void onFinish() {
-                   Timer.cancel();
-                    Toast.makeText(Quiz.this,"Time Over", Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(Quiz.this,result.class);
-                    intent.putExtra("correct",getCorrectAns());
-                    intent.putExtra("incorrect",getIncorrectAns());
-
-                    startActivity(intent);
-
-                    finish();
-            }
-        };
-        Timer.start();
-    }
-
-    private void cancelTimer() {
-        if(Timer!=null)
-            Timer.cancel();
-    }
-
-    private  int getCorrectAns()
-    {
-        int correctAns = 0;
-
-        for (int i=0;i<questionsLists.size();i++)
-        {
-            final String getUserAnswer = questionsLists.get(i).getUserAnswer();
-            final String getAnswer = questionsLists.get(i).getAnswer();
-
-            if(getUserAnswer.equals(getAnswer))
-            {
-                correctAns++;
-            }
-        }
-
-        return correctAns;
-    }
-
-    private  int getIncorrectAns()
-    {
-        int correctAns = 0;
-
-        for (int i=0;i<questionsLists.size();i++)
-        {
-            final String getuserAnswer = questionsLists.get(i).getUserAnswer();
-            final String getAnswer = questionsLists.get(i).getAnswer();
-
-            if(!getuserAnswer.equals(getAnswer))
-            {
-                correctAns++;
-            }
-        }
-        return correctAns;
-    }
-
-
-//    private int getSize(){
-//        return questionsLists.size();
-//    }
-
-    @Override
-    public void onBackPressed() {
-//        quizTimer.purge();
-//        quizTimer.cancel();
-        cancelTimer();
-        startActivity(new Intent(Quiz.this,dashboard.class));
-        finish();
-    }
-    private void revealAnswer()
-    {
-        final String getAnswer = questionsLists.get(currentQuestionPosition).getAnswer();
-
-        if (op1.getText().toString().equals(getAnswer))
-        {
-            op1.setBackgroundResource(R.drawable.correct_bg);
-            op1.setTextColor(Color.parseColor("#FFFFFF"));
-
-        }
-        else if (op2.getText().toString().equals(getAnswer))
-        {
-            op2.setBackgroundResource(R.drawable.correct_bg);
-            op2.setTextColor(Color.parseColor("#FFFFFF"));
-        }
-        else if (op3.getText().toString().equals(getAnswer))
-        {
-            op3.setBackgroundResource(R.drawable.correct_bg);
-            op3.setTextColor(Color.parseColor("#FFFFFF"));
-        }
-        else if (op4.getText().toString().equals(getAnswer))
-        {
-            op4.setBackgroundResource(R.drawable.correct_bg);
-            op4.setTextColor(Color.parseColor("#FFFFFF"));
-        }
-    }
 }

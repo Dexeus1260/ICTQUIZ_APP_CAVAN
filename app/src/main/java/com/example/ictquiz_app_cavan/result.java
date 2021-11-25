@@ -21,12 +21,13 @@ public class result extends AppCompatActivity {
 
         final AppCompatButton again = findViewById(R.id.newGame);
 
-        final int getCorrect = getIntent().getIntExtra("correct",0);
-        final int getWrong = getIntent().getIntExtra("incorrect",0);
+        Bundle extras = getIntent().getExtras();
+        final int getCorrect = extras.getInt("right");
+        final int getIncorrect = extras.getInt("wrong");
 
 //        Toast.makeText(this,String.valueOf(getCorrect), Toast.LENGTH_SHORT).show();
         right.setText( String.valueOf(getCorrect)+ " correct" );
-        wrong.setText( String.valueOf(getWrong)+ " wrong" );
+        wrong.setText(String.valueOf(getIncorrect) + " wrong" );
 
         again.setOnClickListener(new View.OnClickListener() {
             @Override
