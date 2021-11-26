@@ -1,4 +1,4 @@
-# ICTQUIZ_APP_CAVAN
+# ICTQUIZ_APP
 
 ICT QUIZ APP developed using android studio with java programming language.
 
